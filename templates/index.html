@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AWS Auto Scaling Demo</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    text-align:center;
+    margin-top:80px;
+}
+
+.box{
+    background:white;
+    width:500px;
+    margin:auto;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+input{
+    padding:10px;
+    width:200px;
+}
+
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+}
+
+.info{
+    margin-top:20px;
+    text-align:left;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>AWS Auto Scaling Demo</h2>
+
+<form method="POST">
+<label>Enter Number of Users</label><br><br>
+<input type="number" name="users" required>
+<br><br>
+<button type="submit">Simulate Traffic</button>
+</form>
+
+<div class="info">
+
+<p><b>Current Instance ID:</b> {{ instance_id }}</p>
+
+<p><b>Instance Type:</b> {{ instance_type }}</p>
+
+<p><b>Hostname:</b> {{ hostname }}</p>
+
+<p><b>Total Requests:</b> {{ request_count }}</p>
+
+<p><b>Server Status:</b> {{ status }}</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
