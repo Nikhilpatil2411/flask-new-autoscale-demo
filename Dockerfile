@@ -1,6 +1,6 @@
-FROM python:3.6
-COPY . /app
+FROM python:3.10
 WORKDIR /app
-EXPOSE 5000
+COPY . /app
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python", "app.py"]
+EXPOSE 5000
+CMD ["python", "app.py"]
