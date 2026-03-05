@@ -7,20 +7,25 @@ app = Flask(__name__)
 @app.route("/", methods=["GET","POST"])
 def home():
 
-    instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
-    instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type").text
+    try:
+        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
+        instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type",timeout=2).text
+    except:
+        instance_id = "i-demo123"
+        instance_type = "t2.micro"
+
     hostname = socket.gethostname()
 
-    users = 0
-    status = "Normal Traffic"
+    users = ""
+    status = ""
 
     if request.method == "POST":
-        users = int(request.form["users"])
+        users = request.form["users"]
 
-        if users > 2000:
+        if int(users) > 2000:
             status = "Scaling Up → Shift to t3.micro"
         else:
-            status = "Normal Traffic → Running on t2.micro"
+            status = "Normal Traffic"
 
     return render_template("index.html",
                            instance_id=instance_id,
@@ -30,4 +35,4 @@ def home():
                            status=status)
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=5000)
+    app.run(host="0.0.0.0",port=5000)
